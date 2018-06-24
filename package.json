@@ -1,0 +1,60 @@
+{
+  "name": "typescript-es6-boilerplate",
+  "version": "1.0.0",
+  "description": "Typescript ES6 Boilerplate",
+  "main": "build/index.js",
+  "repository": "ssh://git@github.com:GreenVine/typescript-es6-boilerplate.git",
+  "author": "Robin Liu <commits@codemy.fun>",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">= 6.0.0",
+    "yarn": ">= 1.3.0"
+  },
+  "directories": {
+    "lib": "node_modules"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf build/",
+    "test": "mocha tests/**/*.spec.ts --require ts-node/register --reporter spec",
+    "lint+test": "npm run lint && mocha tests/**/*.spec.ts --require ts-node/register --reporter spec",
+    "lint": "tslint --project ./ src/**/*.ts tests/**/*.ts",
+    "lint:check": "tslint-config-prettier-check ./tslint.json",
+    "start": "node -r dotenv/config $NODE_DEBUG_OPTION build/index.js",
+    "watch": "tsc -w",
+    "serve": "nodemon -e ts --watch src --exec 'npm run build && npm run start'",
+    "prettify": "prettier --config ./package.json '**/*.ts'",
+    "prettify:fix": "prettier --config ./package.json '**/*.ts' --write",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 100,
+    "arrowParens": "always"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^9.4.6",
+    "chai": "^4.1.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "mocha": "^5.0.1",
+    "nodemon": "^1.14.12",
+    "prettier": "^1.10.2",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.7.0",
+    "typescript": "^2.7.1"
+  }
+}
